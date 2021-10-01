@@ -1,0 +1,4 @@
+{% extends 'base.html' %} {% load reverse_it %} {% block title %}Update JobPost{% endblock %} {% block content %} <div
+    class="container">
+    <form method="post"> {% csrf_token %} {{form.as_p}} <button type="submit">Add</button> </form>
+</div> {% endblock %}

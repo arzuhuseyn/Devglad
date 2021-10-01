@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load reverse_it %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+
+
+<div class="jumbotron">
+  {{welcome|clean_str|safe}}
+
+  <p class="lead">Change your life. Get better jobs with {{avg_salary}}$ avarage.</p>
+  <hr class="my-4">
+  <p>{% lorem 1 %}</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+  </p>
+</div>
+
+<div class="container-fluid mb-5">
+  <form method="POST">
+    {% csrf_token %}
+    <div class="form-row">
+      <div class="col">
+        <input type="text" name="job_name" class="form-control" placeholder="Job Name">
+      </div>
+      <div class="col">
+        <input type="text" name="company_name" class="form-control" placeholder="Company Name">
+      </div>
+      <div class="col">
+        <button class="btn btn-primary" type="submit">Search</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="row">
+  {% for job in jobs %}
+  <div class="col-md-4">
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title {% if forloop.counter|divisibleby:'2' %}even{%else%}odd{% endif %}">{{forloop.counter}} -
+          {{job.title}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{job.company}}</h6>
+        <p class="card-text">{{job.description|truncatewords:10}}</p>
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="container jumbotron mt-5">
+  <h3 class="text-center">Add new job</h3>
+
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-row">
+      <div class="col">
+        <div class="form-group">
+          {{form.title}}
+          {{form.title.errors}}
+        </div> 
+      </div>
+      <div class="col">
+        <div class="form-group">
+        {{form.required_experience}}
+        {{form.required_experience.errors}}
+        </div>
+      </div>
+    </div>
+   
+    <div class="form-group">
+      {{form.description.errors}}
+      {{form.description}}
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+{% endblock %}
