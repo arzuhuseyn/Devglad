@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load reverse_it %}
+{% load reverse_it i18n %}
 
 {% block title %}{{title}}{% endblock %}
 
@@ -8,12 +8,15 @@
 
 <div class="jumbotron">
   {{welcome|clean_str|safe}}
+  {% get_current_language as LANGUAGE_CODE %}
 
-  <p class="lead">Change your life. Get better jobs with {{avg_salary}}$ avarage.</p>
+  <p>You are using site in {{LANGUAGE_CODE}}</p>
+
+  <p class="lead">{% blocktranslate %} Change your life. Get better jobs with "{{avg_salary}}"$ avarage. {% endblocktranslate %}</p>
   <hr class="my-4">
   <p>{% lorem 1 %}</p>
   <p class="lead">
-    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+    <a class="btn btn-primary btn-lg" href="#" role="button">{% translate 'Learn more' %}</a>
   </p>
 </div>
 
@@ -52,7 +55,7 @@
 </div>
 
 <div class="container jumbotron mt-5">
-  <h3 class="text-center">Add new job</h3>
+  <h3 class="text-center">{% translate 'Add new job' %}</h3>
 
   <form method="post">
     {% csrf_token %}

@@ -2,7 +2,11 @@ from django.contrib import admin
 from django.contrib.auth.models import Group
 from catalog.models import JobPost, Company, Tag, Representative
 from django.utils.html import format_html
+from django.utils.translation import gettext_lazy as _
 
+from django.contrib.flatpages.models import FlatPage
+
+from catalog.forms import FlatpageCustomForm
 
 admin.site.site_header = 'Devglad Admin'
 admin.site.site_title = 'Devglad Admin'
@@ -54,3 +58,19 @@ class JobPostAdmin(admin.ModelAdmin):
 
 admin.site.register(Representative)
 
+
+admin.site.unregister(FlatPage)
+
+@admin.register(FlatPage)
+class FlatPageAdmin(admin.ModelAdmin):
+    form = FlatpageCustomForm
+    fieldsets = (
+        (None, {'fields': ('url', 'title', 'content', 'sites')}),
+        (_('Advanced options'), {
+            'classes': ('collapse',),
+            'fields': ('registration_required', 'template_name'),
+        }),
+    )
+    list_display = ('url', 'title')
+    list_filter = ('sites', 'registration_required')
+    search_fields = ('url', 'title')

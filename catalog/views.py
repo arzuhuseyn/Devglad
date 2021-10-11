@@ -99,7 +99,7 @@ class JobPostGenericDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['sources'] = self.get_sources()
+        context['sources'] = self.get_sources() 
         return context
 
 
@@ -117,7 +117,6 @@ class JobPostList(ListView):
         if self.request.GET.get('types'):
             qs = qs.filter(is_active=types.get(self.request.GET.get('types')))
         return qs
-
 
 class JobPostCreate(CreateView):
     model = JobPost
@@ -155,3 +154,16 @@ class JobPostRequest(FormView):
 
     def form_invalid(self, form):
         return self.render_to_response(self.get_context_data(form=form))
+
+
+
+def change_language(request):
+    if request.GET.get('lang') == 'en' or request.GET.get('lang') == 'az':
+        path_list = request.META.get('HTTP_REFERER').split('/')
+        
+        path_list[3] = request.GET.get('lang')
+        path = '/'.join(path_list)
+     
+        response = HttpResponseRedirect(path)
+        response.set_cookie('django_language', request.GET['lang'])
+    return response

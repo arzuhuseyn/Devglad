@@ -10,6 +10,6 @@ urlpatterns = [
     path('create/', views.JobPostCreate.as_view(), name='jobpost_create'),
     path('create/request/', views.JobPostRequest.as_view(), name='jobpost_request'),
     path('update/<int:pk>/', views.JobPostUpdate.as_view(), name='jobpost_update'),
-    path('delete/<int:pk>/', views.JobPostDelete.as_view(), name='jobpost_delete'),
-    path('about/', views.AboutUs.as_view(), name='about'),
+    path('delete/<int:pk>/', views.JobPostDelete.as_view(), name='jobpost_delete'), 
+    path('set_language/', views.change_language, name='set_language'),
 ]

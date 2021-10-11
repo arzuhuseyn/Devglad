@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load reverse_it %}
+
+{% block title %}{{flatpage.title}}{% endblock %}
+
+{% block content %}
+<div class="container">
+    {{flatpage.content|safe}}
+</div>
+
+
+{% endblock %}

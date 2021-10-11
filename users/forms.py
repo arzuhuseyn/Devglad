@@ -10,8 +10,6 @@ class UserRegisterForm(forms.Form):
     first_name = forms.CharField(label='First name')
     last_name = forms.CharField(label='Last name')
     bio = forms.CharField(label='Bio', widget=forms.Textarea)
-    type = forms.ChoiceField(label='Type', choices=[(1, 'Developer'), (2, 'Recruiter')])
-    #photo = forms.ImageField(label='Photo')
 
     def clean_email(self):
         email = self.cleaned_data['email']

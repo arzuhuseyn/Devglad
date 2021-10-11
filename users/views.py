@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model, login, logout, authenticate
+from django.views.generic import DetailView
 from django.db import transaction
 
 from users.models import UserProfile
@@ -19,12 +20,6 @@ def register_user(request):
                 )
                 user.set_password(form.cleaned_data.get('password'))
                 user.save()
-                user_profile = UserProfile.objects.create(
-                    user=user,
-                    user_type=form.cleaned_data.get('type'),
-                    bio=form.cleaned_data.get('bio'),
-                    photo=form.cleaned_data.get('photo')
-                )
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
@@ -45,3 +40,8 @@ def logout_user(request):
     if request.user.is_authenticated:
         logout(request)
         return redirect('login')
+
+
+class UserProfileView(DetailView):
+    model = UserProfile
+    template_name = 'users/profile.html'
