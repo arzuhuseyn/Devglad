@@ -35,11 +35,11 @@ INSTALLED_APPS = [
     'modeltranslation',
 
     # Django Apps
-    'django.contrib.sites',
+    #'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.flatpages',
+    #'django.contrib.flatpages',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -47,9 +47,12 @@ INSTALLED_APPS = [
     # Third-party apps
     'rosetta',
     'ckeditor',
+    'rest_framework',
+    'rest_framework_simplejwt',
 
     # Custom Apps
     'users',
+    'api',
     'catalog.apps.CatalogConfig',
 ]
 
@@ -228,4 +231,15 @@ CKEDITOR_CONFIGS = {
             'elementspath'
         ]),
     } 
+}
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES' : (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
 }

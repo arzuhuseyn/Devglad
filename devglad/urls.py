@@ -26,8 +26,9 @@ urlpatterns = i18n_patterns(
     path("users/", include("users.urls")),
     path('admin/', admin.site.urls),
     path('rosetta/', include('rosetta.urls')),
-    path('', include('django.contrib.flatpages.urls')),
+    # path('', include('django.contrib.flatpages.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('api/', include('api.urls')),
 )
 
 if settings.DEBUG:

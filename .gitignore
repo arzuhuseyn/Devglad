@@ -1,1 +1,3 @@
 **/migrations/**
+postgredb/
+venv/

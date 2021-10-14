@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import widgets
-from django.contrib.flatpages.forms import FlatpageForm
+# from django.contrib.flatpages.forms import FlatpageForm
 
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
@@ -36,5 +36,5 @@ class JobPostForm(forms.ModelForm):
         }
 
 
-class FlatpageCustomForm(FlatpageForm):
-    content = forms.CharField(widget=CKEditorUploadingWidget())
+# class FlatpageCustomForm(FlatpageForm):
+#     content = forms.CharField(widget=CKEditorUploadingWidget())

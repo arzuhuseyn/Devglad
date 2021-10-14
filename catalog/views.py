@@ -31,7 +31,7 @@ def home_view(request):
         'title' : 'Home Page',
         'welcome' : "<h1>Walcome</h1>",
         'jobs' : qs,
-        'avg_salary' : int(str(avg_salary)[:4]),
+        #'avg_salary' : int(str(avg_salary)[:4]),
         'form' : JobPostRequestForm(request.POST or None)
     }
 
